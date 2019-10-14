@@ -1,0 +1,31 @@
+{
+    "name": "chebon/mpesa",
+    "description": "M-Pesa PHP gateway processor for making payments.",
+    "type": "library",
+    "keywords": ["Payments", "M-Pesa", "Safaricom"],
+    "require": {
+        "php": ">=7.0",
+        "ext-curl": "*",
+      "ext-json": "*"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vincent K Chebon",
+            "email": "chebonv@gmail.com",
+            "homepage": "https://chebonv.co.ke",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Chebon\\Mpesa\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Chebon\\Mpesa\\": "tests/"
+        }
+    }
+}
