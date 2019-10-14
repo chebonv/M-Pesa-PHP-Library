@@ -1,5 +1,5 @@
 {
-    "name": "chebon/mpesa",
+    "name": "chebon/mpesa-php-lib",
     "description": "M-Pesa PHP gateway processor for making payments.",
     "type": "library",
     "keywords": ["Payments", "M-Pesa", "Safaricom"],
