@@ -6,6 +6,7 @@ namespace Chebon\Mpesa;
 
 class MpesaApis
 {
+
     /**
      * Use this function to initiate a MpesaApis transaction
      * @param $ShortCode | 6 digit M-Pesa Till Number or PayBill Number
@@ -25,7 +26,7 @@ class MpesaApis
         }
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type:application/json','Authorization:Bearer '.MpesaOAuth::generateToken()));
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type:application/json','Authorization:Bearer '.self::accessToken()));
         $curl_post_data = array(
             'ShortCode' => $ShortCode,
             'CommandID' => $CommandID,
@@ -38,7 +39,7 @@ class MpesaApis
         curl_setopt($curl, CURLOPT_POST, true);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, Config::isSsl());
-        curl_setopt($curl, CURLOPT_HEADER, true);
+        curl_setopt($curl, CURLOPT_HEADER, false);
         $curl_response = curl_exec($curl);
         return $curl_response;
     }
@@ -61,7 +62,7 @@ class MpesaApis
         }
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type:application/json', 'Authorization:Bearer '.MpesaOAuth::generateToken())); //setting custom header
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type:application/json', 'Authorization:Bearer '.self::accessToken())); //setting custom header
         $curl_post_data = array(
             //Fill in the request parameters with valid values
             'ShortCode' => $shortcode,
@@ -74,8 +75,13 @@ class MpesaApis
         curl_setopt($curl, CURLOPT_POST, true);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, Config::isSsl());
-        curl_setopt($curl, CURLOPT_HEADER, true);
+        curl_setopt($curl, CURLOPT_HEADER, false);
         $curl_response = curl_exec($curl);
         return $curl_response;
+    }
+
+    public static function accessToken()
+    {
+        return MpesaOAuth::generateToken();
     }
 }
